@@ -1,14 +1,28 @@
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator, createAppContainer, createBottomTabNavigator } from "react-navigation";
 import HomeScreen from '../pages/Home'
 import DetailsScreen from '../pages/Detail' 
 
 const Navigator = createStackNavigator(
+    // {
+    //   HomeScreen: {
+    //     screen: HomeScreen,
+    //     navigationOptions: {
+    //       header: null
+    //     }
+    //   },
+    //   DetailsScreen: {
+    //     screen: DetailsScreen,
+    //     navigationOptions: {
+    //       header: null
+    //     }
+    //   }
+    // }
+    // {
+    //   initialRouteName: "Home"
+    // }
     {
-      Home: HomeScreen,
-      Details: DetailsScreen
-    },
-    {
-      initialRouteName: "Home"
+      HomeScreen: HomeScreen,
+      DetailsScreen: DetailsScreen
     }
 );
 
