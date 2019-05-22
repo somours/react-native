@@ -1,31 +1,34 @@
-import { createStackNavigator, createAppContainer, createBottomTabNavigator } from "react-navigation";
-import HomeScreen from '../pages/Home'
-import DetailsScreen from '../pages/Detail' 
+import { createStackNavigator, createAppContainer, createSwitchNavigator } from "react-navigation";
+import HomePage from '../pages/HomePage'
+import DetailPage from '../pages/DetailPage' 
+import WelcomePage from '../pages/WellcomePage'
 
-const Navigator = createStackNavigator(
-    // {
-    //   HomeScreen: {
-    //     screen: HomeScreen,
-    //     navigationOptions: {
-    //       header: null
-    //     }
-    //   },
-    //   DetailsScreen: {
-    //     screen: DetailsScreen,
-    //     navigationOptions: {
-    //       header: null
-    //     }
-    //   }
-    // }
-    // {
-    //   initialRouteName: "Home"
-    // }
-    {
-      HomeScreen: HomeScreen,
-      DetailsScreen: DetailsScreen
+const InitNavigator = createStackNavigator({
+  WelcomePage: WelcomePage
+})
+
+const MainNavigator = createStackNavigator({
+  HomePage: {
+    screen: HomePage,
+    navigationOptions: {
+      header: null
     }
-);
+  },
+  DetailPage: {
+    screen: DetailPage,
+    navigationOptions: {
+      header: null
+    }
+  }
+})
 
-const AppNavigator = createAppContainer(Navigator);
+const AppNavigator = createAppContainer(createSwitchNavigator({
+  Init: InitNavigator,
+  Main: MainNavigator
+},{
+  navigationOptions: {
+    header: null
+  }
+}));
 
 export default AppNavigator
