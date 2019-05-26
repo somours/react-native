@@ -7,6 +7,9 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MyPage from '../pages/MyPage'
+import {BottomTabBar} from 'react-navigation-tabs';
+import { connect } from 'react-redux';
+
 
 const Tabs = {
     PopularPage: {
@@ -63,14 +66,55 @@ const Tabs = {
     }
 }
 
-let BottomTab =createAppContainer(createBottomTabNavigator(Tabs)) 
+// let BottomTab =createAppContainer(createBottomTabNavigator(Tabs)) 
 
 class DynamicTabNavigator extends Component {
+    constructor(props) {
+        super(props)
+        console.disableYellowBox = true
+    }
+
+    _tabNavigator() {
+        if(this.Tabs) {
+            return this.Tabs
+        }
+        const {PopularPage, TrendingPage, FavoritePage, MyPage} = Tabs
+        const tabs = {PopularPage, TrendingPage, FavoritePage, MyPage}
+        PopularPage.navigationOptions.tabBarLabel = '最热'
+        return this.Tabs = createAppContainer(createBottomTabNavigator(tabs), {
+            tabBarComponent: props => {
+                return <TabBarComponnet theme={this.UNSAFE_componentWillMount.props.theme} {...props} />
+            }
+        })
+    }
     render() {
-        return (
-            <BottomTab />
-        )
+        const Tab = this._tabNavigator()
+        return <Tab />
     }
 }
 
-export default DynamicTabNavigator
+class TabBarComponnet extends Component {
+    constructor(props){
+        super(props)
+        this.theme = {
+            tinyColor: props.activeTinyColor,
+            updateTime: new Date().getTime
+        }
+    }
+
+    render() {
+        return <BottomTabBar 
+            {...this.props}
+            activeTinyColor={this.props.themeColor}
+        />
+    }
+}
+
+
+const mapStateToProps = state => ({
+    theme: state.theme.theme
+})
+
+
+export default connect(mapStateToProps)(DynamicTabNavigator)
+// export default DynamicTabNavigator
