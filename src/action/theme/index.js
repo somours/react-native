@@ -13,3 +13,10 @@ export function onThemeInit() {
     })
   }
 }
+
+export function onShowCustomThemeView(show) {
+  return {
+    type: types.SHOW_THEME_VIEW,
+    customThemeViewVisible: show
+  }
+}

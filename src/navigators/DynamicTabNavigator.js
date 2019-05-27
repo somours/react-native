@@ -16,11 +16,11 @@ const Tabs = {
         screen: PopularPage,
         navigationOptions: {
             tabBarLabel: '最热',
-            tabBarIcon: ({tinyColor, focused}) => (
+            tabBarIcon: ({tintColor, focused}) => (
                 <MaterialIcons 
                     name={'whatshot'}
                     size={26}
-                    style={{color: tinyColor}}
+                    style={{color: tintColor}}
                 />
             )
         }
@@ -29,11 +29,11 @@ const Tabs = {
         screen: TrendingPage,
         navigationOptions: {
             tabBarLabel: '趋势',
-            tabBarIcon: ({tinyColor, focused}) => (
+            tabBarIcon: ({tintColor, focused}) => (
                 <Ionicons 
                     name={'md-trending-up'}
                     size={26}
-                    style={{color: tinyColor}}
+                    style={{color: tintColor}}
                 />
             )
         }
@@ -42,11 +42,11 @@ const Tabs = {
         screen: FavoritePage,
         navigationOptions: {
             tabBarLabel: '喜欢',
-            tabBarIcon: ({tinyColor, focused}) => (
+            tabBarIcon: ({tintColor, focused}) => (
                 <MaterialIcons 
                     name={'favorite'}
                     size={26}
-                    style={{color: tinyColor}}
+                    style={{color: tintColor}}
                 />
             )
         }
@@ -55,11 +55,11 @@ const Tabs = {
         screen: MyPage,
         navigationOptions: {
             tabBarLabel: '我的',
-            tabBarIcon: ({tinyColor, focused}) => (
+            tabBarIcon: ({tintColor, focused}) => (
                 <Entypo 
                     name={'user'}
                     size={26}
-                    style={{color: tinyColor}}
+                    style={{color: tintColor}}
                 />
             )
         }
@@ -83,7 +83,7 @@ class DynamicTabNavigator extends Component {
         PopularPage.navigationOptions.tabBarLabel = '最热'
         return this.Tabs = createAppContainer(createBottomTabNavigator(tabs), {
             tabBarComponent: props => {
-                return <TabBarComponnet theme={this.UNSAFE_componentWillMount.props.theme} {...props} />
+                return <TabBarComponent theme={this.props.theme} {...props} />
             }
         })
     }
@@ -93,12 +93,12 @@ class DynamicTabNavigator extends Component {
     }
 }
 
-class TabBarComponnet extends Component {
+class TabBarComponent extends Component {
     constructor(props){
         super(props)
         this.theme = {
-            tinyColor: props.activeTinyColor,
-            updateTime: new Date().getTime
+            tintColor: props.activeTintColor,
+            updateTime: new Date().getTime()
         }
     }
 
