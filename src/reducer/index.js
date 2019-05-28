@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux'
 import {rootCom, RootNavigator} from '../navigators/AppNavigators';
 import theme from './theme/index'
+import language from './language/index'
 
 
 //1.指定默认state
@@ -17,7 +18,8 @@ const navReducer = (state = navState, action) => {
 
 const index = combineReducers({
     nav: navReducer,
-    theme: theme
+    theme: theme,
+    language
 })
 
 export default index

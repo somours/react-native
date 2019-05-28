@@ -1,7 +1,6 @@
 import {AsyncStorage} from 'react-native'
 import langs from '../../res/data/langs'
 import keys from '../../res/data/keys'
-import { resolve } from 'url';
 
 export const FLAG_LANGUAGE = {
   flag_language: 'language_dao_language',
@@ -14,7 +13,7 @@ export default class LanguageDao {
   }
   fetch() {
     return new Promise((resolve, reject) => {
-      AsyncStorage .getItem(this.flag, (error,result) => {
+      AsyncStorage.getItem(this.flag, (error,result) => {
         if(error) {
           reject(error)
           return

@@ -1,24 +1,108 @@
 import React, {Component} from 'react'
-import {View, Text} from 'react-native'
+import {View, Text, StyleSheet} from 'react-native'
+import {connect} from 'react-redux'
 import {createMaterialTopTabNavigator, createAppContainer} from 'react-navigation'
-export default class TrendingPage extends Component {
+import {FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
+import action from '../action';
+class TrendingPage extends Component {
     constructor(props) {
         super(props)
+				const {onLoadLanguage} = this.props
+        onLoadLanguage(FLAG_LANGUAGE.flag_language)
     }
     _genTab() {
       const tabs = {}
-
-    }
+			const {keys, theme} = this.props
+			keys.forEach((item, index) => {
+				if(item.checked) {
+					tabs[`tab${index}`] = {
+						screen: props => <TrendingTab {...props} tabLabel={item.name} />,
+						navigationOptions: {
+							title: item.name
+						}
+					}
+				}
+			})
+			return tabs
+		}
 
     _tabNav() {
       const {theme} = this.props
-      this.theme = theme
-    }
+			this.theme = theme
+			this.tabNav = createAppContainer(createMaterialTopTabNavigator(
+				this._genTab(),{
+					tabBarOptions: {
+						tabStyle: styles.tabStyle,
+						upperCaseLabel: false,
+						scrollEnabled: true,
+						style: {
+							backgroundColor: theme.themeColor,
+							height: 30,
+						},
+						indicatorStyle: styles.indicatorStyle,
+						labelStyle: styles.labelStyle
+					},
+					lazy: true
+				}
+			))
+			return this.tabNav
+		}
     render() {
+			const {keys, theme} = this.props;
+			const TabNavigator = keys.length ? this._tabNav() : null;
+			// const TabNavigator = this._tabNav()
         return (
-            <View>
-                <Text>this is TrendingPage</Text>
+            <View style={styles.container}>
+              {TabNavigator && <TabNavigator/>}
             </View>
         )
     }
 }
+
+const mapTrendingStateToProps = state => ({
+    keys: state.language.languages,
+    theme: state.theme.theme
+})
+
+const mapTrendingDispatchToProps = dispatch => ({
+    onLoadLanguage: (flag) => dispatch(action.onLoadLanguage(flag))
+})
+
+export default connect(mapTrendingStateToProps, mapTrendingDispatchToProps)(TrendingPage)
+
+class TrendingTab extends Component {
+	constructor(props){
+		super(props)
+	}
+	render() {
+		return (
+			<View >
+				<Text>{this.props.tabLabel}</Text>
+			</View>
+		)
+	}
+}
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1
+	},
+	tabStyle: {
+		padding: 10,
+	},
+	indicatorStyle: {
+		height: 2,
+		backgroundColor: 'white'
+	},
+	labelStyle: {
+		fontSize: 13,
+    margin: 0,
+	},
+	indicatorContainer: {
+		alignItems: "center"
+	},
+	indicator: {
+		color: 'red',
+		margin: 10
+	}
+})
