@@ -1,12 +1,19 @@
 import React, {Component} from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import {connect} from 'react-redux'
 import {createMaterialTopTabNavigator, createAppContainer} from 'react-navigation'
 import {FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
 import action from '../action';
+import TrendingDialog, {TimeSpans} from '../common/TrendingDialog'
+import NavigationBar from '../common/NavigationBar'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+
 class TrendingPage extends Component {
     constructor(props) {
-        super(props)
+				super(props)
+				this.state = {
+					timeSpan: TimeSpans[0]
+				}
 				const {onLoadLanguage} = this.props
         onLoadLanguage(FLAG_LANGUAGE.flag_language)
     }
@@ -24,6 +31,43 @@ class TrendingPage extends Component {
 				}
 			})
 			return tabs
+		}
+
+		renderTitleView() {
+			return (
+				<View>
+					<TouchableOpacity 
+						underlayColor='transparent'
+						onPress={() => this.dialog.show()}
+					>
+						<View style={{flexDirection: 'row', alignItems: 'center'}}>
+							<Text style={{fontSize: 18,color:'#fff',fontWeight: '400'}}>
+								趋势 {this.state.timeSpan.showText}
+							</Text>
+							<MaterialIcons
+								name={'arrow-drop-down'}
+								size={22}
+								style={{color: 'white'}}
+							/>
+						</View>
+					</TouchableOpacity>
+				</View>
+			)
+		}
+
+		onSelectTimeSpan(tab) {
+			this.dialog.dismiss()
+			this.setState({
+				timeSpan: tab
+			})
+
+		}
+
+		renderTrendingDialog() {
+			return <TrendingDialog 
+				ref={dialog => this.dialog = dialog}
+				onSelect={tab => this.onSelectTimeSpan(tab)}
+			/>
 		}
 
     _tabNav() {
@@ -49,11 +93,22 @@ class TrendingPage extends Component {
 		}
     render() {
 			const {keys, theme} = this.props;
+			let statusBar = {
+				backgroundColor: theme.themeColor,
+				barStyle: 'light-content'
+			}
+			let navigationBar = <NavigationBar 
+				titleView={this.renderTitleView()}
+				statusBar={statusBar}
+				style={theme.styles.navBar}
+			/>
+
 			const TabNavigator = keys.length ? this._tabNav() : null;
-			// const TabNavigator = this._tabNav()
         return (
             <View style={styles.container}>
-              {TabNavigator && <TabNavigator/>}
+							{navigationBar}
+							{TabNavigator && <TabNavigator/>}
+							{this.renderTrendingDialog()}
             </View>
         )
     }

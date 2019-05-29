@@ -1,14 +1,19 @@
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from "react-navigation";
 import HomePage from '../pages/HomePage'
 import DetailPage from '../pages/DetailPage' 
-import WelcomePage from '../pages/WellcomePage'
+import WelcomePage from '../pages/WelcomePage'
 import {connect} from 'react-redux'
 import {createReactNavigationReduxMiddleware, createReduxContainer} from 'react-navigation-redux-helpers';
 
 export const rootCom = 'Init' //设置跟路由
 
 const InitNavigator = createStackNavigator({
-  WelcomePage: WelcomePage
+  WelcomePage: {
+    screen: WelcomePage,
+    navigationOptions: {
+      header: null
+    }
+  }
 })
 
 const MainNavigator = createStackNavigator({
