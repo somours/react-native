@@ -7,6 +7,9 @@ import action from '../action';
 import TrendingDialog, {TimeSpans} from '../common/TrendingDialog'
 import NavigationBar from '../common/NavigationBar'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+const URL = 'https://github.com/trending/';
+const EVENT_TYPE_TIME_SPAN_CHANGE = "EVENT_TYPE_TIME_SPAN_CHANGE";
+
 
 class TrendingPage extends Component {
     constructor(props) {
@@ -128,7 +131,28 @@ export default connect(mapTrendingStateToProps, mapTrendingDispatchToProps)(Tren
 class TrendingTab extends Component {
 	constructor(props){
 		super(props)
+		const {tabLabel, timeSpan} = this.props
+		this.storeName = tabLabel
+		this.timeSpan = timeSpan
+		this.isFavoriteChanged = false
 	}
+	getFetchUrl(key) {
+		return URL + key + '?' + this.timeSpan.searchText
+	}
+	componentDidMount() {
+		this.loadData()
+	}
+
+	loadData(loadMore, refreshFavorite) {
+		if(loadMore) {
+
+		} else if(refreshFavorite) {
+
+		} else {
+			
+		}
+	}
+
 	render() {
 		return (
 			<View >
