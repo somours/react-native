@@ -2,7 +2,7 @@ import Types from '../types'
 import DataStore, {FLAG_STORAGE} from '../../expand/dao/DataStore'
 import {_projectModels, handData} from '../ActionUtil'
 
-export function onFreshTrending(storeName, url, pageSize, favoriteDao) {
+export function onRefreshTrending(storeName, url, pageSize, favoriteDao) {
   return dispatch => {
     dispatch({
       type: Types.TRENDING_REFRESH, 

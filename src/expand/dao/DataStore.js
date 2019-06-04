@@ -14,8 +14,7 @@ export default class DataStore {
     if(currentDate.getMonth() !== targetDate.getMonth()) return false
     if(currentDate.getDate() !== targetDate.getDate()) return false
     if(currentDate.getHours() -  targetDate.getHours() > 4) return false
-
-    return true
+    return false
   }
 
   fetchData(url, flag) {
