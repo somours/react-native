@@ -7,10 +7,10 @@ import action from '../action';
 import TrendingDialog, {TimeSpans} from '../common/TrendingDialog'
 import TrendingItem from '../common/TrendingItem'
 import NavigationBar from '../common/NavigationBar'
-import MaterialIcons from 'react-navigatorsnative-vector-icons/MaterialIcons'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import FavoraiteDao from '../expand/dao/FavoriteDao'
 import {FLAG_STORAGE} from '../expand/dao/DataStore'
-import NavigationUtil from '..//NavigationUtil'
+import NavigationUtil from '../navigators/NavigationUtil'
 import Toast from 'react-native-easy-toast'
 
 const favoriteDao = new FavoraiteDao(FLAG_STORAGE.flag_trending)
@@ -31,7 +31,6 @@ class TrendingPage extends Component {
       const tabs = {}
 			const {keys, theme} = this.props
 			keys.forEach((item, index) => {
-				debugger
 				if(item.checked) {
 					tabs[`tab${index}`] = {
 						screen: props => <TrendingTabPage {...props} timeSpan={this.state.timeSpan} theme={theme} tabLabel={item.name} />,
