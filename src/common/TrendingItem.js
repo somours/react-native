@@ -25,8 +25,8 @@ export default class TrendingItem extends BaseItem{
                     >
                     </HTMLView>
                     <Text style={styles.description}>{item.meta}</Text>
-                    <View>
-                        <View>
+                    <View style={styles.row}>
+                        <View style={styles.row}>
                             <Text>Built by: </Text>
                             {
                                 item.contributors.map((result, i, arr) => {
@@ -63,9 +63,9 @@ const styles = StyleSheet.create({
         elevation:2      
     },
     row: {
-        justifyContent: 'space-bewteen',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
         alignItems: 'center',
-        flexDirection: 'row'
     },
     title: {
         fontSize: 16,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     },
     description: {
         fontSize: 14,
-        marginBOttom: 2,
+        marginBottom: 2,
         color: '#757575'
     }
 })
