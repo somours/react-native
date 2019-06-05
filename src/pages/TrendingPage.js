@@ -12,6 +12,7 @@ import FavoraiteDao from '../expand/dao/FavoriteDao'
 import {FLAG_STORAGE} from '../expand/dao/DataStore'
 import NavigationUtil from '../navigators/NavigationUtil'
 import Toast from 'react-native-easy-toast'
+import FavoriteUtil from '../util/FavoriteUtil'
 
 const favoriteDao = new FavoraiteDao(FLAG_STORAGE.flag_trending)
 const URL = 'https://github.com/trending/';
@@ -185,7 +186,7 @@ class TrendingTab extends Component {
 		const {theme} = this.props
 		return <TrendingItem
 			projectModel={item}
-			theme={theme.color}
+			theme={theme}
 			onSelect={(callBack) => {
 				NavigationUtil.goPage({
 					theme,
@@ -195,6 +196,7 @@ class TrendingTab extends Component {
 				}, 'DetailPage')
 			}}
 		/>
+			// onFavorite={(item, isFavorite) => }
 	}
 
 	genIndicator() {
