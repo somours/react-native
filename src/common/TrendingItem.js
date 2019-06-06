@@ -5,9 +5,9 @@ import HTMLView from 'react-native-htmlview'
 
 export default class TrendingItem extends BaseItem{
     render() {
-        const {ProjectModel} = this.props
-        const {item} = ProjectModel
-        if(item) return null;
+        const {projectModel} = this.props
+        const {item} = projectModel
+        if(!item) return null;
         let description = '<p>' + item.description + '<p/>'
         return (
             <TouchableOpacity onPress={() => this.onItemClick()}>
