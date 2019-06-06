@@ -182,7 +182,9 @@ class TrendingTab extends Component {
 	}
 
 	renderItem(data) {
+		console.log('data',data)
 		const item = data.item
+		console.log(item)
 		const {theme} = this.props
 		return <TrendingItem
 			projectModel={item}
@@ -200,7 +202,7 @@ class TrendingTab extends Component {
 	}
 
 	genIndicator() {
-		return this._store.hideLoadingMore ? null : <View style={styles.indicatorContainer}>
+		return this._store().hideLoadingMore ? null : <View style={styles.indicatorContainer}>
 			<ActivityIndicator style={styles.indicatorStyle} />
 			<Text>正在加载更多</Text>
 		</View>
@@ -209,7 +211,8 @@ class TrendingTab extends Component {
 	render() {
 		let store = this._store()
 		const {theme} = this.props
-		console.log('store', store)
+		console.log(store)
+		debugger
 		return (
 			<View  style={styles.container}>
 				<FlatList 
