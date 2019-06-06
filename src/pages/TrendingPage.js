@@ -92,7 +92,7 @@ class TrendingPage extends Component {
 						scrollEnabled: true,
 						style: {
 							backgroundColor: theme.themeColor,
-							height: 30,
+							height: 40,
 						},
 						indicatorStyle: styles.indicatorStyle,
 						labelStyle: styles.labelStyle
@@ -207,13 +207,14 @@ class TrendingTab extends Component {
 	}
 
 	render() {
-		let store = this._store
+		let store = this._store()
 		const {theme} = this.props
+		console.log('store', store)
 		return (
 			<View  style={styles.container}>
 				<FlatList 
 					data={store.projectModels}
-					renderItem={(data) => this.renderItem(data)}
+					renderItem={data => this.renderItem(data)}
 					keyExtractor={item => '' + item.item.fullName}
 					refreshControl={
 						<RefreshControl
@@ -260,7 +261,7 @@ const styles = StyleSheet.create({
 		padding: 10,
 	},
 	indicatorStyle: {
-		height: 2,
+		height: 1,
 		backgroundColor: 'white'
 	},
 	labelStyle: {

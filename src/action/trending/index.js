@@ -1,6 +1,7 @@
 import Types from '../types'
 import DataStore, {FLAG_STORAGE} from '../../expand/dao/DataStore'
 import {_projectModels, handData} from '../ActionUtil'
+import {AsyncStorage} from 'react-native'
 
 export function onRefreshTrending(storeName, url, pageSize, favoriteDao) {
   return dispatch => {
@@ -9,6 +10,7 @@ export function onRefreshTrending(storeName, url, pageSize, favoriteDao) {
       storeName
     })
     let dataStore = new DataStore()
+    AsyncStorage.clear()
     dataStore.fetchData(url, FLAG_STORAGE.flag_trending).then((data) => {
       handData(Types.TRENDING_REFRESH_SUCCESS, dispatch, storeName, data, pageSize, favoriteDao)
     }).catch((error) => {

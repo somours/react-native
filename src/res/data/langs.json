@@ -1,5 +1,11 @@
 [
   {
+    "path": "",
+    "name": "All Language",
+    "short_name": "All",
+    "checked": true
+  },
+  {
     "path": "unknown",
     "name": "Unknown",
     "checked": true
