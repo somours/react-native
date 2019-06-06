@@ -197,6 +197,7 @@ class TrendingTab extends Component {
 					callBack
 				}, 'DetailPage')
 			}}
+			onFavorite={(item, isFavorite) => FavoriteUtil.onFavorite(favoriteDao, item, isFavorite, FLAG_STORAGE.flag_trending)}
 		/>
 			// onFavorite={(item, isFavorite) => }
 	}
@@ -212,7 +213,6 @@ class TrendingTab extends Component {
 		let store = this._store()
 		const {theme} = this.props
 		console.log(store)
-		debugger
 		return (
 			<View  style={styles.container}>
 				<FlatList 
