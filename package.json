@@ -14,7 +14,7 @@
     "react-native-gesture-handler": "^1.2.1",
     "react-native-htmlview": "^0.14.0",
     "react-native-reanimated": "^1.0.1",
-    "react-native-vector-icons": "^6.3.0",
+    "react-native-vector-icons": "^6.0.2",
     "react-navigation": "^3.11.0",
     "react-navigation-redux-helpers": "^3.0.0",
     "react-navigation-tabs": "^2.1.3",

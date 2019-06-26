@@ -1,12 +1,12 @@
 import ProjectModel from '../model/ProjectModel'
 import Utils from '../util/Util'
 
-export function handData(actionType, dispatch, storeName, data, pageSize, favoriteDao, params) {
+export function handleData(actionType, dispatch, storeName, data, pageSize, favoriteDao, params) {
   let fixItems = []
-  if(data && data.data) {
-    if(Array.isArray(data.data)) {
+  if (data && data.data) {
+    if (Array.isArray(data.data)) {
       fixItems = data.data
-    } else if(Array.isArray(data.data.items)) {
+    } else if (Array.isArray(data.data.items)) {
       fixItems = data.data.items
     }
   }
@@ -29,11 +29,11 @@ export async function _projectModel(showItems, favoriteDao, callback) {
   let keys = []
   try {
     keys = await favoriteDao.getFavoriteKeys()
-  } catch(e) {
+  } catch (e) {
     console.log(e)
   }
   let projectModels = []
-  for(let i = 0, len = showItems.length; i < len ; i++) {
+  for (let i = 0, len = showItems.length; i < len; i++) {
     projectModels.push(new ProjectModel(showItems[i], Utils.checkFavorite(showItems[i], keys)))
   }
   doCallBack(callback, projectModels)
@@ -41,7 +41,7 @@ export async function _projectModel(showItems, favoriteDao, callback) {
 
 
 export const doCallBack = (callback, object) => {
-  if(typeof callback === 'function') {
+  if (typeof callback === 'function') {
     callback(object)
   }
 }
