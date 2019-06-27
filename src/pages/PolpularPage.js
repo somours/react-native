@@ -37,12 +37,40 @@ class PopularPage extends Component {
         })
         return tabs
     }
+
+    renderRightButton() {
+        const { theme } = this.props
+        return <TouchableOpacity
+            onPress={() => { }}
+        >
+            <View style={{ padding: 5, marginRight: 8 }}>
+                <Ionicons
+                    name={'ios-search'}
+                    size={24}
+                    style={{
+                        marginRight: 8,
+                        alignSelf: 'center',
+                        color: 'white'
+                    }}
+                />
+            </View>
+        </TouchableOpacity>
+    }
+
     render() {
         const { keys, theme } = this.props
         let statusBar = {
             backgroundColor: theme.themeColor,
             barStyle: 'light-content'
         }
+
+        let navigationBar = <NavigationBar
+            title={'最热'}
+            statusBar={statusBar}
+            style={theme.styles.navBar}
+            rightButton={this.renderRightButton()}
+        />
+
         const TabNavigator = keys.length ? createAppContainer(createMaterialTopTabNavigator(
             this._genTabs(), {
                 tabBarOptions: {
@@ -61,7 +89,7 @@ class PopularPage extends Component {
 
         return (
             <View style={styles.container}>
-                <Text>this is PopularPage</Text>
+                {navigationBar}
                 {TabNavigator && <TabNavigator />}
             </View>
         )
