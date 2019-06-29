@@ -10,6 +10,8 @@ import Toast from 'react-native-easy-toast'
 import PopularItem from '../common/PopularItem';
 import NavigationUtil from '../navigators/NavigationUtil';
 import FavoriteUtil from '../util/FavoriteUtil';
+import NavigationBar from '../common/NavigationBar'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const URL = 'https://api.github.com/search/repositories?q='
 const QUERY_STR = '&sort=stars'

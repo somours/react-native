@@ -1,13 +1,14 @@
-import React, {Component} from 'react'
-import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native'
+import React, { Component } from 'react'
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import BaseItem from './BaseItem'
 import HTMLView from 'react-native-htmlview'
 
-export default class TrendingItem extends BaseItem{
+export default class TrendingItem extends BaseItem {
     render() {
-        const {projectModel} = this.props
-        const {item} = projectModel
-        if(!item) return null;
+        const { projectModel } = this.props
+        const { item } = projectModel
+        debugger
+        if (!item) return null;
         let description = '<p>' + item.description + '<p/>'
         return (
             <TouchableOpacity onPress={() => this.onItemClick()}>
@@ -15,9 +16,9 @@ export default class TrendingItem extends BaseItem{
                     <Text style={styles.title}>
                         {item.fullName}
                     </Text>
-                    <HTMLView 
+                    <HTMLView
                         value={description}
-                        onLinkPress={() => {}}
+                        onLinkPress={() => { }}
                         stylesheet={{
                             P: styles.description,
                             a: styles.description
@@ -30,10 +31,10 @@ export default class TrendingItem extends BaseItem{
                             <Text>Built by: </Text>
                             {
                                 item.contributors.map((result, i, arr) => {
-                                    return <Image 
+                                    return <Image
                                         key={i}
-                                        style={{width:22,height: 22,margin:2}}
-                                        source={{uri: arr[i]}}
+                                        style={{ width: 22, height: 22, margin: 2 }}
+                                        source={{ uri: arr[i] }}
                                     />
                                 })
                             }
@@ -51,16 +52,16 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 10,
         marginLeft: 5,
-        marginRight:5,
+        marginRight: 5,
         marginVertical: 3,
         borderColor: '#dddddd',
         borderWidth: 0.5,
         borderRadius: 2,
         shadowColor: 'gray',
-        shadowOffset: {width: 0.5, height: 0.5},
+        shadowOffset: { width: 0.5, height: 0.5 },
         shadowOpacity: 0.4,
         shadowRadius: 1,
-        elevation:2      
+        elevation: 2
     },
     row: {
         justifyContent: 'space-between',
