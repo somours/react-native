@@ -42,7 +42,7 @@ export default class DetailPage extends Component {
     if (this.state.canGoBack) {
       this.webView.goBack()
     } else {
-      NavigationUtil.goBack(this.props.naviogation)
+      NavigationUtil.goBack(this.props.navigation)
     }
   }
 

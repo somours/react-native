@@ -4,6 +4,7 @@ import theme from './theme/index'
 import language from './language/index'
 import trending from './trending'
 import popular from './popular'
+import favorite from './favorite'
 
 
 //1.指定默认state
@@ -23,7 +24,8 @@ const index = combineReducers({
     theme: theme,
     language,
     trending,
-    popular
+    popular,
+    favorite
 })
 
 export default index
