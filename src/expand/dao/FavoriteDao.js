@@ -1,4 +1,4 @@
-import {AsyncStorage} from 'react-native'
+import { AsyncStorage } from 'react-native'
 
 const FAVORITE_KEY_PREFIX = 'favorite_'
 
@@ -8,26 +8,26 @@ export default class FavoriteDao {
   }
 
   saveFavoriteItem(key, value, callback) {
-    AsyncStorage.setItem(key,value, (error, result) => {
-      if(!error) {
+    AsyncStorage.setItem(key, value, (error, result) => {
+      if (!error) {
         this.updateFavoriteKey(key, true)
       }
     })
   }
   updateFavoriteKey(key, isAdd) {
     AsyncStorage.getItem(this.favoriteKey, (error, result) => {
-      if(!error) {
+      if (!error) {
         let favoriteKeys = []
-        if(result) {
+        if (result) {
           favoriteKeys = JSON.parse(result)
         }
         let index = favoriteKeys.indexOf(key)
-        if(isAdd) {
-          if(index === -1) favoriteKeys.push(key)
+        if (isAdd) {
+          if (index === -1) favoriteKeys.push(key)
         } else {
-          if(index !== -1) favoriteKeys.splice(index, 1)
+          if (index !== -1) favoriteKeys.splice(index, 1)
         }
-        AsyncStorage.setItem(this.favoriteKey,JSON.stringify(favoriteKeys))
+        AsyncStorage.setItem(this.favoriteKey, JSON.stringify(favoriteKeys))
       }
     })
   }
@@ -35,10 +35,10 @@ export default class FavoriteDao {
   getFavoriteKeys() {
     return new Promise((resolve, reject) => {
       AsyncStorage.getItem(this.favoriteKey, (error, result) => {
-        if(!error) {
-          try{
+        if (!error) {
+          try {
             resolve(JSON.parse(result))
-          } catch(e) {
+          } catch (e) {
             reject(e)
           }
         } else {
@@ -48,9 +48,9 @@ export default class FavoriteDao {
     })
   }
 
-  removeFavoriteKey(key) {
+  removeFavoriteItem(key) {
     AsyncStorage.removeItem(key, (error, result) => {
-      if(!error) {
+      if (!error) {
         this.updateFavoriteKey(key, false)
       }
     })
@@ -60,7 +60,7 @@ export default class FavoriteDao {
     return new Promise((resolve, reject) => {
       this.getFavoriteKeys().then((keys) => {
         let items = []
-        if(keys) {
+        if (keys) {
           AsyncStorage.multiGet(keys, (err, stores) => {
             try {
               stores.map((result, i, store) => {
@@ -74,10 +74,10 @@ export default class FavoriteDao {
               reject(e);
             }
           });
-        }else {
+        } else {
           reject(items)
         }
-      })
-    }).catch(error => reject(error))
+      }).catch(error => reject(error))
+    })
   }
 }
