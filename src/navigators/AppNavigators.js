@@ -28,6 +28,12 @@ const MainNavigator = createStackNavigator({
     navigationOptions: {
       header: null
     }
+  },
+  WebViewPage: {
+    screen: WebViewPage,
+    navigationOptions: {
+      header: null
+    }
   }
 })
 
