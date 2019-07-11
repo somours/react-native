@@ -18,6 +18,9 @@ class MyPage extends Component {
 				params.title = '教程'
 				params.url = 'https://coding.m.imooc.com/classindex.html?cid=304';
 				break;
+			case MORE_MENU.About:
+				RouteName = 'AboutPage'
+				break;
 		}
 		if (RouteName) {
 			NavigationUtil.goPage(params, RouteName)
@@ -43,7 +46,7 @@ class MyPage extends Component {
 			<View style={GlobalStyles.root_container}>
 				{navigationBar}
 				<ScrollView>
-					<TouchableOpacity style={styles.item} onPress={() => this.onClick()}>
+					<TouchableOpacity style={styles.item} onPress={() => this.onClick(MORE_MENU.About)}>
 						<View style={styles.about_left}>
 							<Ionicons
 								name={MORE_MENU.About.icon}

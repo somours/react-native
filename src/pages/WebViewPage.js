@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {WebView} from 'react-native-webview'
+import { WebView } from 'react-native-webview'
 import BackPressComponent from '../common/BackPressComponent'
 import NavigationUtil from '../navigators/NavigationUtil'
 import NavigationBar from '../common/NavigationBar'
@@ -35,7 +35,7 @@ export default class WebViewPage extends Component {
     if (this.state.canGoBack) {
       this.webView.goBack()
     } else {
-      NavigationUtil.goPage(this.props.navigation)
+      NavigationUtil.goBack(this.props.navigation)
     }
   }
   onNavigationStateChange(navState) {
@@ -56,11 +56,11 @@ export default class WebViewPage extends Component {
     return (
       <SafeAreaViewPlus style={GlobalStyles.root_container} topColor={theme.themeColor}>
         {navigationBar}
-        <WebView 
+        <WebView
           ref={webView => this.webView = webView}
           startInLoadingState={true}
           onNavigationStateChange={e => this.onNavigationStateChange(e)}
-          source={{uri: this.state.url}}
+          source={{ uri: this.state.url }}
         />
       </SafeAreaViewPlus>
     )

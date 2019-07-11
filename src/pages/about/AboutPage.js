@@ -1,8 +1,10 @@
-import React, { component } from 'react'
+import React, { Component } from 'react'
+import { View } from 'react-native'
 import GlobalStyles from '../../res/styles/GlobalStyles'
 import AboutCommon, { FLAG_ABOUT } from './AboutCommon'
 import config from '../../res/data/config.json'
 import ViewUtil from '../../util/ViewUtil'
+import { MORE_MENU } from '../../common/MORE_MENU'
 
 export default class AboutPage extends Component {
   constructor(props) {
@@ -12,7 +14,7 @@ export default class AboutPage extends Component {
       ...this.params,
       navigation: this.props.navigation,
       flagAbout: FLAG_ABOUT.flag_about
-    }, data => this.setState({ ...data }))
+    })
     this.state = {
       data: config
     }
@@ -32,7 +34,15 @@ export default class AboutPage extends Component {
   }
 
   render() {
-    const
+    const content = <View>
+      {this.getItem(MORE_MENU.Tutorial)}
+      <View style={GlobalStyles.line} />
+      {this.getItem(MORE_MENU.About_Author)}
+      <View style={GlobalStyles.line} />
+      {this.getItem(MORE_MENU.Feedback)}
+    </View>
+
+    return this.aboutCommon.render(content, this.state.data.app)
   }
 
 }

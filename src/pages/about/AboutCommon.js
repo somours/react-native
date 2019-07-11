@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import BackPressComponent from '../../common/BackPressComponent';
 import ParallaxScrollView from 'react-native-parallax-scroll-view'
 import GlobalStyles from '../../res/styles/GlobalStyles'
-import { View, Text, Dimensions, DeviceInfo, Platform, StyleSheet } from 'react-native'
-import { Global } from '@jest/types';
+import { View, Text, Dimensions, DeviceInfo, Platform, StyleSheet, Image } from 'react-native'
 import ViewUtil from '../../util/ViewUtil';
+import NavigationUtil from '../../navigators/NavigationUtil'
 
 
 export const FLAG_ABOUT = { flag_about: 'about', flag_about_me: 'about_me' };
 
 export default class AboutCommon {
   constructor(props, updateState) {
-    super(props)
     this.props = props
     this.updateState = updateState
     this.backPress = new BackPressComponent(() => this.onBackPress())
@@ -32,7 +31,7 @@ export default class AboutCommon {
 
   getParllaxRenderConfig(params) {
     let config = {}
-    let avatar = typeof (param.avatar) === 'string' ? { uri: params.avatar } : params.avatar
+    let avatar = typeof (params.avatar) === 'string' ? { uri: params.avatar } : params.avatar
     config.renderBackground = () => (
       <View key="background">
         <Image
@@ -47,7 +46,7 @@ export default class AboutCommon {
           top: 0,
           width: window.width,
           backgroundColor: 'rgba(0,0,0,.4)',
-          height={ PARALLAX_HEADER_HEIGHT }
+          height: { PARALLAX_HEADER_HEIGHT }
         }}></View>
       </View>
     )
