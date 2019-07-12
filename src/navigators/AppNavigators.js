@@ -5,6 +5,7 @@ import WelcomePage from '../pages/WelcomePage'
 import WebViewPage from '../pages/WebViewPage'
 import AboutPage from '../pages/about/AboutPage'
 import AboutMePage from '../pages/about/AboutMePage'
+import CustomKeyPage from '../pages/CustomKeyPage'
 import { connect } from 'react-redux'
 import { createReactNavigationReduxMiddleware, createReduxContainer } from 'react-navigation-redux-helpers';
 
@@ -46,6 +47,12 @@ const MainNavigator = createStackNavigator({
   },
   AboutMePage: {
     screen: AboutMePage,
+    navigationOptions: {
+      header: null
+    }
+  },
+  CustomKeyPage: {
+    screen: CustomKeyPage,
     navigationOptions: {
       header: null
     }

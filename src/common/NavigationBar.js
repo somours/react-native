@@ -22,7 +22,7 @@ export default class NavigationBar extends Component {
 		titleLayoutStyle: ViewPropTypes.style,
 		hide: PropTypes.bool,
 		statusBar: PropTypes.shape(StatusBarShape),
-		rigthButton: PropTypes.element,
+		rightButton: PropTypes.element,
 		leftButton: PropTypes.element
 	}
 	static defaultProps = {
@@ -46,7 +46,7 @@ export default class NavigationBar extends Component {
 				<View style={[styles.navBarTitleContainer, this.props.titleLayoutStyle]}>
 					{titleView}
 				</View>
-				{this.getButtonElement(this.props.rigthButton)}
+				{this.getButtonElement(this.props.rightButton)}
 			</View>
 
 		return (

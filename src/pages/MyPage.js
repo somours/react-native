@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import { MORE_MENU } from '../common/MORE_MENU'
 import ViewUtil from '../util/ViewUtil';
 import NavigationUtil from '../navigators/NavigationUtil'
+import { FLAG_LANGUAGE } from '../expand/dao/LanguageDao';
 
 class MyPage extends Component {
 	onClick(menu) {
@@ -23,6 +24,13 @@ class MyPage extends Component {
 				break;
 			case MORE_MENU.About_Author:
 				RouteName = 'AboutMePage';
+				break;
+			case MORE_MENU.Custom_Key:
+			case MORE_MENU.Custom_Language:
+			case MORE_MENU.Remove_Key:
+				RouteName = 'CustomKeyPage'
+				params.isRemoveKey = menu === MORE_MENU.Remove_Key
+				params.flag = menu !== MORE_MENU.Custom_Language ? FLAG_LANGUAGE.flag_key : FLAG_LANGUAGE.flag_language
 				break;
 		}
 		if (RouteName) {
