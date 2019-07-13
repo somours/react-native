@@ -13,6 +13,7 @@ import { FLAG_STORAGE } from '../expand/dao/DataStore'
 import NavigationUtil from '../navigators/NavigationUtil'
 import Toast from 'react-native-easy-toast'
 import FavoriteUtil from '../util/FavoriteUtil'
+import ArrayUtil from '../util/ArrayUtil';
 
 const favoriteDao = new FavoraiteDao(FLAG_STORAGE.flag_trending)
 const URL = 'https://github.com/trending/';
@@ -27,10 +28,12 @@ class TrendingPage extends Component {
 		}
 		const { onLoadLanguage } = this.props
 		onLoadLanguage(FLAG_LANGUAGE.flag_language)
+		this.preKeys = [];
 	}
 	_genTab() {
 		const tabs = {}
 		const { keys, theme } = this.props
+		this.preKeys = keys;
 		keys.forEach((item, index) => {
 			if (item.checked) {
 				tabs[`tab${index}`] = {
@@ -83,23 +86,25 @@ class TrendingPage extends Component {
 
 	_tabNav() {
 		const { theme } = this.props
-		this.theme = theme
-		this.tabNav = createAppContainer(createMaterialTopTabNavigator(
-			this._genTab(), {
-				tabBarOptions: {
-					tabStyle: styles.tabStyle,
-					upperCaseLabel: false,
-					scrollEnabled: true,
-					style: {
-						backgroundColor: theme.themeColor,
-						height: 40,
+		if (theme !== this.theme || !this.tabNav || !ArrayUtil.isEqual(this.preKeys, this.props.keys)) {
+			this.theme = theme
+			this.tabNav = createAppContainer(createMaterialTopTabNavigator(
+				this._genTab(), {
+					tabBarOptions: {
+						tabStyle: styles.tabStyle,
+						upperCaseLabel: false,
+						scrollEnabled: true,
+						style: {
+							backgroundColor: theme.themeColor,
+							height: 40,
+						},
+						indicatorStyle: styles.indicatorStyle,
+						labelStyle: styles.labelStyle
 					},
-					indicatorStyle: styles.indicatorStyle,
-					labelStyle: styles.labelStyle
-				},
-				lazy: true
-			}
-		))
+					lazy: true
+				}
+			))
+		}
 		return this.tabNav
 	}
 	render() {
@@ -182,9 +187,7 @@ class TrendingTab extends Component {
 	}
 
 	renderItem(data) {
-		console.log('data', data)
 		const item = data.item
-		console.log(item)
 		const { theme } = this.props
 		return <TrendingItem
 			projectModel={item}
@@ -199,7 +202,6 @@ class TrendingTab extends Component {
 			}}
 			onFavorite={(item, isFavorite) => FavoriteUtil.onFavorite(favoriteDao, item, isFavorite, FLAG_STORAGE.flag_trending)}
 		/>
-		// onFavorite={(item, isFavorite) => }
 	}
 
 	genIndicator() {

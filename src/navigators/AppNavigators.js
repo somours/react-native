@@ -6,6 +6,7 @@ import WebViewPage from '../pages/WebViewPage'
 import AboutPage from '../pages/about/AboutPage'
 import AboutMePage from '../pages/about/AboutMePage'
 import CustomKeyPage from '../pages/CustomKeyPage'
+import SortKeyPage from '../pages/SortKeyPage'
 import { connect } from 'react-redux'
 import { createReactNavigationReduxMiddleware, createReduxContainer } from 'react-navigation-redux-helpers';
 
@@ -53,6 +54,12 @@ const MainNavigator = createStackNavigator({
   },
   CustomKeyPage: {
     screen: CustomKeyPage,
+    navigationOptions: {
+      header: null
+    }
+  },
+  SortKeyPage: {
+    screen: SortKeyPage,
     navigationOptions: {
       header: null
     }
