@@ -8,6 +8,8 @@ import { MORE_MENU } from '../common/MORE_MENU'
 import ViewUtil from '../util/ViewUtil';
 import NavigationUtil from '../navigators/NavigationUtil'
 import { FLAG_LANGUAGE } from '../expand/dao/LanguageDao';
+import actions from '../action/index'
+import { on } from 'cluster';
 
 class MyPage extends Component {
 	onClick(menu) {
@@ -39,6 +41,10 @@ class MyPage extends Component {
 			case MORE_MENU.Sort_Language:
 				RouteName = 'SortKeyPage'
 				params.flag = FLAG_LANGUAGE.flag_language
+				break;
+			case MORE_MENU.Custom_Theme:
+				const { onShowCustomThemeView } = this.props
+				onShowCustomThemeView(true)
 				break;
 		}
 		if (RouteName) {
@@ -124,7 +130,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-	// onShow
+	onShowCustomThemeView: (show) => dispatch(actions.onShowCustomThemeView(show))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPage)

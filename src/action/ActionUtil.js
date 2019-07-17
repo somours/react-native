@@ -45,3 +45,4 @@ export const doCallBack = (callback, object) => {
     callback(object)
   }
 }
+
